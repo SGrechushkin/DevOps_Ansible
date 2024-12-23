@@ -1,0 +1,11 @@
+---
+- name: Execute "ls /etc" command and display output
+  hosts: staging
+  tasks:
+    - name: Run "ls /etc" command
+      command: ls /etc
+      register: ls_output
+
+    - name: Display command output
+      debug:
+        msg: "Contents of /etc: {{ ls_output.stdout }}"

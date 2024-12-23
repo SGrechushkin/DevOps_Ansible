@@ -1,0 +1,24 @@
+---
+- name: Install NGINX and deploy index.html
+  hosts: staging
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure NGINX is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Create index.html with custom content
+      copy:
+        dest: /var/www/html/index.html
+        content: "Ansible the best"
